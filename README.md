@@ -11,7 +11,7 @@
 ### 📁 Tasks
 - **Task 1 — EDA:** Python + Pandas — Cleaning, KPIs, Discount analysis → `Task_1_EDA/`
 - **Task 2 — Power BI Dashboard:** Star Schema + DAX + Live Demo → `Task_2_PowerBI_Dashboard/`
-- **Task 3 — Done
+- **Task 3 — Customer Cohort & Churn Analytics:** Python + Pandas — Tenure Cohort, Churn Drivers, Retention Recommendations → `Task_3_Customer_Cohort_Churn/`
 - **Task 4 — Coming Soon**
 
 ### 🛠️ Tools
@@ -19,6 +19,10 @@ Python • Pandas • Matplotlib • Seaborn • Power BI • DAX • Excel • 
 
 ### 🔗 Live Demo — Task 2
 [Task 2 Dashboard — Live Demo](https://Mehak-jilani.github.io/datheon-power-bi-internship/Task_2_PowerBI_Dashboard/)
+
+### 🔗 Live Demo — Task 3
+
+[Task 3 Dashboard — Live Demo](https://mehak-jilani.github.io/datheon-power-bi-internship/Task_3_Customer_Cohort_Churn/Churn_Dashboard_index.html)
 
 ### 👩‍💻 Author
 **Mehak Jilani** — Data Analyst | Python • Power BI • DAX • SQL |
