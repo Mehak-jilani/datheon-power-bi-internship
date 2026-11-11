@@ -1,0 +1,40 @@
+-- Datheon Task 4 — DAX Measures (paste in Power BI: Modeling > New Measure)
+-- Table: Financial (import the Excel Sheet1, rename table to Financial)
+-- Clean first: trim " Sales" column to Sales, fill Discount Band blanks with "None"
+-- NOTE: The Excel has NO Budget column. Variance below uses a What-If parameter,
+-- NOT a data column. In Power BI: Modeling > New Parameter > What-if parameter
+-- Name: Budget Sales Target | Data type: Decimal | Minimum: 0 | Maximum: 200000000 | Increment: 1000000 | Default: 120000000
+
+Gross Sales = SUM(Financial[Gross Sales])
+Total Discounts = SUM(Financial[Discounts])
+Net Sales = SUM(Financial[Sales])
+Total COGS = SUM(Financial[COGS])
+Total Profit = SUM(Financial[Profit])
+Total Units = SUM(Financial[Units Sold])
+
+Gross Profit % = DIVIDE([Total Profit], [Net Sales], 0)
+COGS Ratio = DIVIDE([Total COGS], [Net Sales], 0)
+Discount % of Gross = DIVIDE([Total Discounts], [Gross Sales], 0)
+Margin on Gross % = DIVIDE([Total Profit], [Gross Sales], 0)
+Avg Sale Price = DIVIDE([Net Sales], [Total Units], 0)
+Loss Rows = COUNTROWS(FILTER(Financial, Financial[Profit] < 0))
+
+-- Waterfall helpers (use in Waterfall chart: Category = Waterfall Step, Breakdown = value)
+-- Create a small disconnected table Waterfall_Step with one column Step:
+-- Gross Sales | Discounts | Net Sales | COGS | Profit
+-- Then: Waterfall Value = SWITCH(SELECTEDVALUE(Waterfall_Step[Step]),
+--   "Gross Sales", [Gross Sales], "Discounts", -[Total Discounts],
+--   "Net Sales", [Net Sales], "COGS", -[Total COGS], "Profit", [Total Profit])
+
+-- Scenario / Variance vs What-If Budget Target (ASSUMPTION — state it on dashboard)
+Budget Sales = SELECTEDVALUE('Budget Sales Target'[Budget Sales Target], 120000000)
+Sales Variance vs Budget = [Net Sales] - [Budget Sales]
+Sales Variance % vs Budget = DIVIDE([Sales Variance vs Budget], [Budget Sales], 0)
+Budget Profit (at current margin) = [Budget Sales] * [Gross Profit %]
+
+-- Scenario forecasting slider: Growth % What-If parameter (-20% to +50%)
+-- Name: Growth % | Data type: Decimal | Minimum: -0.20 | Maximum: 0.50 | Increment: 0.01 | Default: 0.10
+Forecast Net Sales = [Net Sales] * (1 + SELECTEDVALUE('Growth %'[Growth %], 0.10))
+Forecast Profit = [Forecast Net Sales] * [Gross Profit %]
+
+-- Conditional formatting: Profit < 0 -> Red, else Green. Margin < 10% -> Amber.
