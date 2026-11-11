@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Task 3 — Customer Cohort & Churn Analytics | Datheon</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:#f4f7fb;color:#17233b}
+header{background:#0b2a4a;color:#fff;padding:28px 22px}header h1{margin:0 0 6px;font-size:28px}header p{margin:0;opacity:.85}
+.wrap{max-width:1120px;margin:0 auto;padding:18px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.card small{color:#64748b;text-transform:uppercase;letter-spacing:.08em;font-weight:700;font-size:11px}
+.card b{font-size:30px;display:block;margin-top:6px}.red{color:#dc2626}.green{color:#059669}.blue{color:#2563eb}.orange{color:#ea580c}
+h2{font-size:18px;margin:22px 0 10px}.panel{background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:14px}
+table{width:100%;border-collapse:collapse}th,td{padding:10px 8px;text-align:left;border-bottom:1px solid #eef2f7;font-size:14px}th{background:#f8fafc}
+.bar{height:14px;background:#e2e8f0;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:#dc2626;border-radius:99px}
+.pill{display:inline-block;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:700}.pill-red{background:#fee2e2;color:#991b1b}.pill-green{background:#dcfce7;color:#166534}
+select{padding:8px 10px;border-radius:8px;border:1px solid #cbd5e1;font-size:14px}
+.note{background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:14px;font-size:14px;line-height:1.6}
+ul{line-height:1.8;font-size:14px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style></head><body>
+<header><h1>Customer Cohort &amp; Churn Analytics — IBM Telco</h1><p>Datheon Task 3 &nbsp;|&nbsp; 7,043 customers &nbsp;|&nbsp; Baseline Churn 26.5% &nbsp;|&nbsp; Filter: <select id="f" onchange="filterCohort()"><option value="all">All Contracts</option><option>Month-to-month</option><option>One year</option><option>Two year</option></select></p></header>
+<div class="wrap">
+<div class="grid">
+<div class="card"><small>Total Customers</small><b>7,043</b></div>
+<div class="card"><small>Churned</small><b class="red">1,869</b></div>
+<div class="card"><small>Baseline Churn</small><b class="red">26.5%</b></div>
+<div class="card"><small>Retained</small><b class="green">5,174</b></div>
+</div>
+
+<h2>1 &nbsp; Tenure Cohort — Retention Matrix</h2>
+<div class="panel"><p style="font-size:13px;color:#64748b">New customers leave fastest. Churn falls as tenure rises. Use the contract filter above — Two-year customers are protected in every cohort.</p>
+<table><tr><th>Cohort</th><th>Customers</th><th>Churn Rate</th><th style="width:35%">Visual</th><th>Risk</th></tr>
+<tr><td><b>0–12 months</b></td><td>2,186</td><td><b>47.4%</b></td><td><div class="bar"><i style="width:47%"></i></div></td><td><span class="pill pill-red">CRITICAL</span></td></tr>
+<tr><td>13–24 months</td><td>1,024</td><td>28.7%</td><td><div class="bar"><i style="width:29%"></i></div></td><td><span class="pill pill-red">HIGH</span></td></tr>
+<tr><td>25–36 months</td><td>832</td><td>21.6%</td><td><div class="bar"><i style="width:22%"></i></div></td><td>MEDIUM</td></tr>
+<tr><td>37–48 months</td><td>762</td><td>19.0%</td><td><div class="bar"><i style="width:19%"></i></div></td><td>MEDIUM</td></tr>
+<tr><td>49–60 months</td><td>832</td><td>14.4%</td><td><div class="bar"><i style="width:14%"></i></div></td><td>LOW</td></tr>
+<tr><td>61–72 months</td><td>1,407</td><td><b>6.6%</b></td><td><div class="bar"><i style="width:7%;background:#059669"></i></div></td><td><span class="pill pill-green">LOYAL</span></td></tr>
+</table>
+<div id="filterNote" style="margin-top:10px;font-size:13px;color:#334155"></div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+<div class="panel"><h2 style="margin-top:0">2 &nbsp; Churn by Contract</h2>
+<table><tr><th>Contract</th><th>Churn</th></tr><tr><td>Month-to-month</td><td><b class="red">42.7%</b></td></tr><tr><td>One year</td><td>11.3%</td></tr><tr><td>Two year</td><td><b class="green">2.8%</b></td></tr></table>
+<p style="font-size:13px">Contract is the biggest lever: 42.7% → 2.8%.</p></div>
+<div class="panel"><h2 style="margin-top:0">3 &nbsp; Churn by Payment Method</h2>
+<table><tr><th>Payment</th><th>Churn</th></tr><tr><td>Electronic check</td><td><b class="red">45.3%</b></td></tr><tr><td>Mailed check</td><td>19.1%</td></tr><tr><td>Bank transfer (auto)</td><td>16.7%</td></tr><tr><td>Credit card (auto)</td><td><b class="green">15.2%</b></td></tr></table>
+<p style="font-size:13px">Auto-pay customers churn ~3x less.</p></div>
+</div>
+
+<h2>4 &nbsp; High-Risk Segments — The Save List</h2>
+<div class="panel"><table><tr><th>Segment</th><th>Customers</th><th>Churn</th><th>Action</th></tr>
+<tr><td><b>Fiber Optic + No Tech Support</b></td><td>2,230</td><td><b class="red">49.4%</b></td><td>Free Tech Support 3 months</td></tr>
+<tr><td><b>Month-to-month + No Tech Support</b></td><td>2,680</td><td><b class="red">50.4%</b></td><td>Support bundle + annual offer</td></tr>
+<tr><td>Month-to-month + Electronic check</td><td>1,850</td><td><b class="red">53.7%</b></td><td>Migrate to auto-pay</td></tr>
+</table><p style="font-size:12px;color:#64748b">All numbers verified from dataset. Month-to-month + Electronic check = 1,850 customers, 53.7% churn.</p></div>
+
+<h2>5 &nbsp; Churned vs Retained Profile</h2>
+<div class="panel"><table><tr><th></th><th>Avg Tenure</th><th>Avg Monthly Charges</th></tr>
+<tr><td><b>Churned</b></td><td>18.0 months</td><td>$74.44</td></tr>
+<tr><td><b>Retained</b></td><td>37.6 months</td><td>$61.27</td></tr></table>
+<p style="font-size:14px">Churned customers pay <b>more</b> but stay <b>less</b> — value perception problem, not price alone.</p></div>
+
+<div class="note"><b>Top 5 Retention Recommendations</b><ol>
+<li><b>First-90-days onboarding</b> — 0–12 mo cohort 47.4% churn. Welcome call + setup help + first-bill explainer.</li>
+<li><b>Month-to-month → Annual</b> — 42.7% vs 2.8%. Offer discount at month 3–6 to lock 1-year.</li>
+<li><b>Bundle Tech Support with Fiber</b> — Fiber + No Support = 49.4% churn. Free support 3 months.</li>
+<li><b>Auto-pay migration</b> — Electronic check 45.3% vs auto-pay ~15%. Auto-pay discount.</li>
+<li><b>Save-play for high bill</b> — MonthlyCharges &gt; $85 + tenure &lt; 12 mo → loyalty discount / plan review.</li>
+</ol></div>
+<p style="font-size:12px;color:#64748b;margin-top:14px">Source: IBM Telco Churn dataset (7,043 rows). Cleaning: TotalCharges 11 blanks → 0. All numbers reproducible via Task3_Churn_Analysis.py. Built for Datheon Task 3.</p>
+</div>
+<script>
+function filterCohort(){
+  var v=document.getElementById('f').value;
+  var el=document.getElementById('filterNote');
+  if(v==='all') el.textContent='';
+  if(v==='Month-to-month') el.textContent='Showing context: Month-to-month overall churn = 42.7% — this contract drives most early-cohort churn. Target: move these customers to 1-year at month 3-6.';
+  if(v==='One year') el.textContent='Showing context: One year overall churn = 11.3% — contract commitment cuts churn by ~31 points vs month-to-month.';
+  if(v==='Two year') el.textContent='Showing context: Two year overall churn = 2.8% — the retention gold standard. Use as benchmark in recommendations.';
+}
+</script>
+</body></html>
