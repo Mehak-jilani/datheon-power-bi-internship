@@ -11,7 +11,7 @@
 ### 📁 Tasks
 - **Task 1 — EDA:** Python + Pandas — Cleaning, KPIs, Discount analysis → `Task_1_EDA/`
 - **Task 2 — Power BI Dashboard:** Star Schema + DAX + Live Demo → `Task_2_PowerBI_Dashboard/`
-- **Task 3 — Coming Soon**
+- **Task 3 — Done
 - **Task 4 — Coming Soon**
 
 ### 🛠️ Tools
