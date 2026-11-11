@@ -1,0 +1,20 @@
+-- Datheon Task 2 — DAX Measures (paste in Power BI: Modeling > New Measure)
+-- Tables: Fact_Orders, Dim_Customer, Dim_Product, Dim_Date
+
+Total Sales = SUM(Fact_Orders[Sales])
+Total Profit = SUM(Fact_Orders[Profit])
+Total Orders = DISTINCTCOUNT(Fact_Orders[Order ID])
+Total Quantity = SUM(Fact_Orders[Quantity])
+
+Profit Margin % = DIVIDE([Total Profit], [Total Sales], 0)
+
+Prior Year Sales = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Dim_Date[Date]))
+YoY Sales Growth % = DIVIDE([Total Sales] - [Prior Year Sales], [Prior Year Sales], 0)
+
+Avg Order Value = DIVIDE([Total Sales], [Total Orders], 0)
+
+Sales — Technology = CALCULATE([Total Sales], Dim_Product[Category] = "Technology")
+Profit — Furniture = CALCULATE([Total Profit], Dim_Product[Category] = "Furniture")
+Profit — Discount >20% = CALCULATE([Total Profit], Fact_Orders[Discount] > 0.20)
+
+-- Conditional formatting: Profit < 0 → Red, else Green
