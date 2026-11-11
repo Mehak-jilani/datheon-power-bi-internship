@@ -15,13 +15,13 @@
 - **Task 4 — Coming Soon**
 
 ### 🛠️ Tools
-Python • Pandas • Power BI • DAX • Excel
+Python • Pandas • Matplotlib • Seaborn • Power BI • DAX • Excel • Google Colab / Jupyter Notebook
 
 ### 🔗 Live Demo — Task 2
 [Task 2 Dashboard — Live Demo](https://Mehak-jilani.github.io/datheon-power-bi-internship/Task_2_PowerBI_Dashboard/)
 
 ### 👩‍💻 Author
-**Mehak Jilani** — Data Analyst | Python • Power BI • DAX • SQL
+**Mehak Jilani** — Data Analyst | Python • Power BI • DAX • SQL |
 CadetX UK (Data Analyst) | Datheon (Power BI Intern)
 
 - 🔗 LinkedIn: https://linkedin.com/in/mehak-jilani
